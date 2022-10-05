@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 
 export class HttpException extends Error {
-  constructor(public message: string, public status: number) {
+  constructor (public message: string, public status: number) {
     super(message)
   }
 }
@@ -11,7 +11,7 @@ export const handleErrorMiddleware = (
   _req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   res.status(err instanceof HttpException ? err.status : 400).json({ error: err.message })
 
   next(err)
